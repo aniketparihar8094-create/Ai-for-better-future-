@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI FOR BETTER FUTURE | Science Exhibition Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Orbitron', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #061024;
+            color: #f8fafc;
+            background-image:
+                radial-gradient(circle at 15% 15%, rgba(16, 185, 129, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 85% 25%, rgba(14, 165, 233, 0.12) 0%, transparent 45%),
+                linear-gradient(rgba(15, 35, 75, 0.35) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(15, 35, 75, 0.35) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+        }
+        .navy-card {
+            background: rgba(11, 25, 56, 0.88);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(56, 189, 248, 0.22);
+            box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.65);
+        }
+        .navy-card:hover { border-color: rgba(16, 185, 129, 0.55); }
+        @media print {
+            body * { visibility: hidden; }
+            #printable-sticker-area, #printable-sticker-area * { visibility: visible; }
+            #printable-sticker-area {
+                position: fixed; left: 50%; top: 45%; transform: translate(-50%, -50%) scale(1.2);
+                box-shadow: none !important; background: #ffffff !important; color: #0f172a !important;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-emerald-500 selection:text-white">
+    <div id="admin-toolbar" class="admin-only sticky top-0 z-50 bg-slate-950/95 backdrop-blur-md border-b-2 border-emerald-500/60 px-4 py-3 shadow-xl">
+        <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2.5">
+                <span class="px-3 py-1 rounded-full bg-amber-400 text-slate-950 font-display font-black text-xs tracking-wider uppercase">ADMIN EDITOR MODE</span>
+                <span id="mode-helper-text" class="hidden sm:inline text-xs text-slate-300">Seedha neeche boxes me type karein &amp; photos upload karein</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2.5">
+                <button type="button" id="btn-toggle-preview" onclick="toggleVisitorPreview()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-sky-400/50 text-sky-300 text-xs sm:text-sm font-bold transition cursor-pointer">👁️ Switch to Visitor Preview</button>
+                <button type="button" onclick="downloadPublicWebsite()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 text-xs sm:text-sm font-extrabold shadow-lg shadow-emerald-500/25 transition cursor-pointer">⬇️ Download Public Website (index.html)</button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="border-b border-sky-900/50 bg-[#07132b]/90 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-white border-2 border-emerald-500 flex items-center justify-center font-display font-black text-[#081736] text-lg shadow-md">AI</div>
+                <div>
+                    <span class="font-display font-extrabold text-sm sm:text-base tracking-wider text-white block leading-none">AI FOR BETTER FUTURE</span>
+                    <span class="text-[11px] text-emerald-400 font-semibold tracking-widest uppercase">Smarter Today, Better Tomorrow</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3 sm:gap-5 text-xs sm:text-sm font-semibold">
+                <a href="#modules" class="text-slate-200 hover:text-emerald-400 transition">Project Modules</a>
+                <a href="#team" class="text-slate-200 hover:text-emerald-400 transition">Team Members</a>
+                <a href="#qr-studio" class="admin-only px-3 py-1.5 rounded-lg bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 hover:bg-emerald-500 hover:text-slate-950 transition">QR Sticker</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-10 pb-12 sm:pt-14 sm:pb-16 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white text-[#081736] rounded-3xl p-6 sm:p-10 shadow-2xl border-4 border-emerald-500 text-center relative overflow-hidden">
+                <div class="inline-block px-3.5 py-1 rounded-full bg-[#081736] text-emerald-400 font-display text-[11px] font-bold tracking-widest uppercase mb-4">SCIENCE &amp; INNOVATION MODEL</div>
+                <div class="edit-mode-only space-y-3 max-w-2xl mx-auto text-left bg-slate-100 p-4 sm:p-5 rounded-2xl border-2 border-dashed border-sky-600">
+                    <div class="text-xs font-bold text-sky-800 uppercase tracking-wider mb-1">✏️ Edit Project Title &amp; Tagline:</div>
+                    <div><label class="block text-[11px] font-bold text-slate-600 mb-1">Project Main Title</label><input type="text" id="edit-project-title" oninput="updateHeaderField('projectTitle', this.value)" class="w-full px-3.5 py-2.5 rounded-xl bg-white border-2 border-slate-300 text-[#081736] font-display font-black text-base sm:text-lg focus:border-emerald-600 focus:outline-none"></div>
+                    <div><label class="block text-[11px] font-bold text-slate-600 mb-1">Bottom Banner Slogan / Subtitle</label><input type="text" id="edit-project-subtitle" oninput="updateHeaderField('projectSubtitle', this.value)" class="w-full px-3.5 py-2 rounded-xl bg-white border-2 border-slate-300 text-emerald-700 font-bold text-sm focus:border-emerald-600 focus:outline-none"></div>
+                </div>
+                <div class="visitor-mode-only hidden">
+                    <h1 id="view-project-title" class="font-display text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#081736] leading-tight">AI FOR <span class="text-emerald-600">BETTER FUTURE</span></h1>
+                    <div class="mt-4 inline-block px-5 py-2 rounded-xl bg-[#081736] text-white font-display font-bold text-xs sm:text-base tracking-[0.18em] uppercase border-2 border-emerald-500"><span id="view-project-subtitle">SMARTER TODAY, BETTER TOMORROW</span></div>
+                </div>
+                <p class="mt-5 max-w-2xl mx-auto text-slate-600 text-xs sm:text-sm font-medium leading-relaxed">An integrated smart-city exhibition model demonstrating how Artificial Intelligence transforms Healthcare, Clean Solar &amp; Wind Energy, Smart Transport, Public Safety, and Digital Education.</p>
+            </div>
+        </div>
+    </header>
+
+    <section id="modules" class="py-10 sm:py-14 px-4 max-w-6xl mx-auto">
+        <div class="text-center mb-10">
+            <span class="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-bold uppercase tracking-widest">Working Model Sections</span>
+            <h2 class="font-display text-2xl sm:text-4xl font-extrabold text-white mt-2">Core <span class="text-emerald-400">AI Applications</span> in Our Model</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="navy-card rounded-3xl p-6 transition duration-300 flex flex-col justify-between"><div><div class="flex items-center justify-between mb-4"><span class="px-3 py-1 rounded-lg bg-white text-[#081736] font-display font-extrabold text-xs tracking-wide border-l-4 border-rose-500">HEALTHCARE</span><span class="text-2xl" aria-hidden="true">🏥</span></div><h3 class="text-lg font-bold text-white mb-2">Early Disease Detection</h3><p class="text-slate-300 text-sm leading-relaxed">AI helps in early disease detection, faster medical scan analysis, better diagnosis, and accurate treatment planning for patients.</p></div><div class="mt-5 pt-3 border-t border-sky-900/60 flex items-center justify-between text-xs"><span class="text-slate-400">Smart Hospital Zone</span><span class="text-emerald-400 font-bold">AI Diagnostics</span></div></div>
+            <div class="navy-card rounded-3xl p-6 transition duration-300 flex flex-col justify-between"><div><div class="flex items-center justify-between mb-4"><span class="px-3 py-1 rounded-lg bg-white text-[#081736] font-display font-extrabold text-xs tracking-wide border-l-4 border-emerald-500">ENVIRONMENT PROTECTION</span><span class="text-2xl" aria-hidden="true">🌍</span></div><h3 class="text-lg font-bold text-white mb-2">Climate, Wind &amp; Solar AI</h3><p class="text-slate-300 text-sm leading-relaxed">AI helps in climate prediction, optimizing solar panels and wind turbines, reducing pollution, and protecting our green planet.</p></div><div class="mt-5 pt-3 border-t border-sky-900/60 flex items-center justify-between text-xs"><span class="text-slate-400">Clean Energy Hill</span><span class="text-emerald-400 font-bold">Eco-Smart Grid</span></div></div>
+            <div class="navy-card rounded-3xl p-6 transition duration-300 flex flex-col justify-between"><div><div class="flex items-center justify-between mb-4"><span class="px-3 py-1 rounded-lg bg-white text-[#081736] font-display font-extrabold text-xs tracking-wide border-l-4 border-sky-500">SMART TRANSPORT</span><span class="text-2xl" aria-hidden="true">🚘</span></div><h3 class="text-lg font-bold text-white mb-2">Self-Driving &amp; Traffic AI</h3><p class="text-slate-300 text-sm leading-relaxed">AI enables self-driving autonomous vehicles, intelligent traffic signal management, and safe, congestion-free smart transportation.</p></div><div class="mt-5 pt-3 border-t border-sky-900/60 flex items-center justify-between text-xs"><span class="text-slate-400">Smart Highway Crossroad</span><span class="text-sky-400 font-bold">Auto-Navigation</span></div></div>
+            <div class="navy-card rounded-3xl p-6 transition duration-300 flex flex-col justify-between"><div><div class="flex items-center justify-between mb-4"><span class="px-3 py-1 rounded-lg bg-white text-[#081736] font-display font-extrabold text-xs tracking-wide border-l-4 border-indigo-500">SAFETY &amp; SECURITY</span><span class="text-2xl" aria-hidden="true">🛡️</span></div><h3 class="text-lg font-bold text-white mb-2">Smart Surveillance System</h3><p class="text-slate-300 text-sm leading-relaxed">AI improves 24/7 CCTV surveillance, detects security threats in real time, and alerts authorities immediately to keep citizens safe.</p></div><div class="mt-5 pt-3 border-t border-sky-900/60 flex items-center justify-between text-xs"><span class="text-slate-400">AI Camera Tower</span><span class="text-indigo-400 font-bold">Threat Detection</span></div></div>
+            <div class="navy-card rounded-3xl p-6 transition duration-300 flex flex-col justify-between"><div><div class="flex items-center justify-between mb-4"><span class="px-3 py-1 rounded-lg bg-white text-[#081736] font-display font-extrabold text-xs tracking-wide border-l-4 border-amber-500">EDUCATION</span><span class="text-2xl" aria-hidden="true">🎓</span></div><h3 class="text-lg font-bold text-white mb-2">Personalized Smart Tutoring</h3><p class="text-slate-300 text-sm leading-relaxed">AI personalizes learning for every student, provides interactive smart tutoring, and enhances modern digital classrooms.</p></div><div class="mt-5 pt-3 border-t border-sky-900/60 flex items-center justify-between text-xs"><span class="text-slate-400">Digital Classroom Zone</span><span class="text-amber-400 font-bold">AI Smart Tutor</span></div></div>
+            <div class="navy-card rounded-3xl p-6 transition duration-300 flex flex-col justify-between border-emerald-400/50 bg-gradient-to-br from-[#0b1f47] to-[#08292b]"><div><div class="flex items-center justify-between mb-4"><span class="px-3 py-1 rounded-lg bg-emerald-400 text-[#081736] font-display font-extrabold text-xs tracking-wide">CENTRAL AI BRAIN</span><span class="text-2xl" aria-hidden="true">🧠</span></div><h3 class="text-lg font-bold text-white mb-2">Neural Command Hub</h3><p class="text-slate-200 text-sm leading-relaxed">The central AI head sculpture represents neural intelligence connecting all 5 sectors together to build a sustainable, smarter world.</p></div><div class="mt-5 pt-3 border-t border-emerald-500/30 flex items-center justify-between text-xs"><span class="text-emerald-300">Core Intelligence</span><span class="text-white font-bold">Connected Future</span></div></div>
+        </div>
+    </section>
+
+    <section id="team" class="py-10 sm:py-14 px-4 max-w-6xl mx-auto">
+        <div class="navy-card rounded-3xl p-6 sm:p-10 border-2 border-sky-500/30">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-slate-800">
+                <div class="flex-1"><span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Project Creators &amp; Team Information</span>
+                    <div class="edit-mode-only mt-3 grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-950/90 p-4 rounded-2xl border border-dashed border-amber-400/60">
+                        <div><label class="block text-[11px] font-bold text-amber-300 mb-1">Team Name</label><input type="text" id="edit-team-name" oninput="updateHeaderField('teamName', this.value)" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white font-bold text-sm focus:border-emerald-400 focus:outline-none"></div>
+                        <div><label class="block text-[11px] font-bold text-amber-300 mb-1">School / Class / Guide Teacher</label><input type="text" id="edit-school-info" oninput="updateHeaderField('schoolInfo', this.value)" class="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:border-emerald-400 focus:outline-none"></div>
+                    </div>
+                    <div class="visitor-mode-only hidden mt-1"><h2 id="view-team-name" class="font-display text-2xl sm:text-4xl font-extrabold text-white">Team Innovators</h2><p id="view-school-info" class="text-emerald-300 text-sm sm:text-base font-medium mt-1">Science Exhibition • Class 10th • Guide: Mr. Sharma</p></div>
+                </div>
+                <div class="edit-mode-only shrink-0"><button type="button" onclick="addTeamMember()" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-lg shadow-sky-500/20 transition cursor-pointer">+ Add Member</button></div>
+            </div>
+            <div id="team-members-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-7"></div>
+            <div class="admin-only mt-8 p-4 rounded-2xl bg-emerald-950/50 border border-emerald-500/40 flex flex-col sm:flex-row items-center justify-between gap-3"><p class="text-xs sm:text-sm text-emerald-200"><strong>Ready to share?</strong> Jab sabhi naam aur photos set ho jayein, to public file download karke GitHub Pages par upload karein—visitors ko koi edit option nahi dikhega.</p><button type="button" onclick="downloadPublicWebsite()" class="shrink-0 px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm transition cursor-pointer">⬇️ Download Public Website (index.html)</button></div>
+        </div>
+    </section>
+
+    <section id="qr-studio" class="admin-only py-10 sm:py-14 px-4 max-w-6xl mx-auto">
+        <div class="navy-card rounded-3xl p-6 sm:p-10 border-2 border-amber-400/30">
+            <div class="text-center mb-8"><span class="px-3 py-1 rounded-full bg-amber-400/15 border border-amber-400/40 text-amber-300 text-xs font-bold uppercase tracking-wider">Admin Tool • Printable QR Code Cutout</span><h2 class="font-display text-2xl sm:text-3xl font-extrabold text-white mt-2">Generate &amp; Print <span class="text-sky-400">Project QR Sticker</span></h2><p class="text-slate-300 text-xs sm:text-sm max-w-2xl mx-auto mt-1">Apni free hosted website (GitHub Pages) ka link neeche paste karein aur apne physical model par lagane ke liye QR sticker download ya print karein.</p></div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-4">
+                    <div><label class="block text-xs font-bold uppercase tracking-wider text-sky-400 mb-1.5">1. Paste Your Hosted Website Link (GitHub Pages URL):</label><input type="url" id="qr-url-input" value="https://username.github.io/ai-better-future/" oninput="generateQRCode()" placeholder="https://yourname.github.io/ai-better-future/" class="w-full px-4 py-3 rounded-xl bg-slate-950 border-2 border-slate-700 text-white text-sm focus:border-sky-400 focus:outline-none"></div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div><label class="block text-xs font-bold text-slate-400 mb-1">Sticker Top Title</label><input type="text" id="qr-sticker-heading" value="SCAN TO MEET OUR TEAM" oninput="updateStickerText()" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm focus:border-emerald-400 focus:outline-none"></div><div><label class="block text-xs font-bold text-slate-400 mb-1">Sticker Bottom Label</label><input type="text" id="qr-sticker-sub" value="AI FOR BETTER FUTURE" oninput="updateStickerText()" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white text-sm focus:border-emerald-400 focus:outline-none"></div></div>
+                    <div class="pt-2 flex flex-wrap gap-3"><button type="button" onclick="downloadQRStickerPNG()" class="flex-1 min-w-[200px] px-5 py-3.5 rounded-xl bg-gradient-to-r from-sky-500 to-emerald-500 hover:from-sky-400 hover:to-emerald-400 text-slate-950 font-extrabold text-sm shadow-lg transition cursor-pointer">📥 Download QR Sticker (PNG)</button><button type="button" onclick="window.print()" class="px-5 py-3.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-bold text-sm transition cursor-pointer">🖨️ Print QR Cutout</button></div>
+                    <div class="p-4 rounded-2xl bg-slate-950/90 border border-slate-800 text-xs text-slate-300 space-y-1.5 leading-relaxed"><div class="font-bold text-emerald-400 uppercase tracking-wider">100% Free Hosting Steps (No Credit Card Needed):</div><p>1. Upar <strong>"Download Public Website (index.html)"</strong> button dabayein.</p><p>2. <strong>github.com</strong> par free account banakar <strong>New Repository</strong> (<code class="text-sky-400">ai-better-future</code>, Public) banayein aur apni <code class="text-emerald-400">index.html</code> file upload karein.</p><p>3. Repository ki <strong>Settings &rarr; Pages</strong> me Branch <code class="text-emerald-400">main</code> select karke Save karein—aapko free live link mil jayega!</p></div>
+                </div>
+                <div class="lg:col-span-5 flex flex-col items-center"><span class="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-2">✂️ Cutout Sticker Preview</span><div id="printable-sticker-area" class="w-full max-w-[320px] bg-white text-[#081736] rounded-3xl p-4 shadow-2xl border-4 border-emerald-500"><div class="border-2 border-dashed border-[#081736] rounded-2xl p-5 flex flex-col items-center text-center bg-slate-50"><span class="px-3 py-1 rounded-full bg-[#081736] text-emerald-400 font-display text-[10px] font-bold tracking-widest uppercase mb-2.5">AI PROJECT SCANNER</span><h3 id="sticker-preview-heading" class="font-display font-black text-base text-[#081736] leading-tight mb-3">SCAN TO MEET OUR TEAM</h3><div class="p-3 bg-white rounded-2xl border-2 border-[#081736] shadow-sm mb-3"><div id="qrcode-box" class="flex items-center justify-center min-w-[170px] min-h-[170px]"></div></div><p id="sticker-preview-sub" class="font-display font-extrabold text-xs text-emerald-700 tracking-wide uppercase">AI FOR BETTER FUTURE</p><p id="sticker-preview-team" class="text-xs font-semibold text-slate-600 mt-1">By Team Innovators</p></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-8 px-4 border-t border-slate-800/80 text-center text-xs text-slate-400"><p class="font-display font-bold text-slate-200 tracking-wider">AI FOR BETTER FUTURE • SCIENCE EXHIBITION PROJECT</p><p class="mt-1">Smarter Today, Better Tomorrow</p></footer>
+    <div id="status-toast" class="admin-only fixed bottom-5 right-5 z-50 px-5 py-3 rounded-2xl bg-emerald-500 text-slate-950 font-extrabold text-xs sm:text-sm shadow-2xl transition-all duration-300 opacity-0 translate-y-10 pointer-events-none">Saved!</div>
+    <script id="embedded-project-json" type="application/json">null</script>
+
+    <script>
+        const STORAGE_KEY = 'ai_future_project_data_v4';
+        const DEFAULT_DATA = {
+            projectTitle: "AI FOR BETTER FUTURE", projectSubtitle: "SMARTER TODAY, BETTER TOMORROW",
+            teamName: "Team Innovators", schoolInfo: "Science & Robotics Exhibition • Class 10th • Mentor: Mr. Sharma",
+            members: [
+                {name:"Aarav Kumar",role:"Team Leader & AI Concept",classRoll:"Class 10-A • Roll No. 01",photo:""},
+                {name:"Ananya Singh",role:"Model Architecture & Design",classRoll:"Class 10-A • Roll No. 08",photo:""},
+                {name:"Rohan Verma",role:"Solar & Circuit Setup",classRoll:"Class 10-B • Roll No. 14",photo:""},
+                {name:"Priya Patel",role:"Research & Presentation",classRoll:"Class 10-B • Roll No. 21",photo:""}
+            ]
+        };
+
+        function loadInitialState() {
+            try {
+                const embeddedScript = document.getElementById('embedded-project-json');
+                if (embeddedScript && embeddedScript.textContent.trim() !== 'null' && embeddedScript.textContent.trim() !== '') {
+                    const parsed = JSON.parse(embeddedScript.textContent); if (parsed && parsed.members) return parsed;
+                }
+            } catch(e) { console.warn("Embedded JSON read fallback:", e); }
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) { const parsed = JSON.parse(raw); if (parsed && parsed.members) return parsed; }
+            } catch(e) { console.warn("localStorage unavailable in sandbox:", e); }
+            return JSON.parse(JSON.stringify(DEFAULT_DATA));
+        }
+
+        let appState = loadInitialState();
+        let isPublicLockedFile = !document.getElementById('admin-toolbar');
+        let isVisitorPreview = isPublicLockedFile;
+
+        function persistState() {
+            if (isPublicLockedFile) return;
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appState)); } catch(e) { console.warn("Storage write skipped:", e); }
+        }
+        function showToast(text) {
+            const toast = document.getElementById('status-toast'); if (!toast) return;
+            toast.textContent = text; toast.classList.remove('opacity-0', 'translate-y-10');
+            clearTimeout(window._toastTimer); window._toastTimer = setTimeout(() => toast.classList.add('opacity-0', 'translate-y-10'), 2600);
+        }
+        function escapeHTML(str) {
+            return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+        function syncHeaderDisplays() {
+            const titleEl = document.getElementById('view-project-title');
+            if (titleEl) {
+                const words = (appState.projectTitle || "AI FOR BETTER FUTURE").trim().split(/\s+/);
+                if (words.length >= 3) titleEl.innerHTML = `${escapeHTML(words.slice(0,2).join(' '))} <span class="text-emerald-600">${escapeHTML(words.slice(2).join(' '))}</span>`;
+                else titleEl.textContent = appState.projectTitle;
+            }
+            const subEl = document.getElementById('view-project-subtitle'); if (subEl) subEl.textContent = appState.projectSubtitle;
+            const teamEl = document.getElementById('view-team-name'); if (teamEl) teamEl.textContent = appState.teamName;
+            const schoolEl = document.getElementById('view-school-info'); if (schoolEl) schoolEl.textContent = appState.schoolInfo;
+            const stickerTeamEl = document.getElementById('sticker-preview-team'); if (stickerTeamEl) stickerTeamEl.textContent = `By ${appState.teamName}`;
+            const inTitle = document.getElementById('edit-project-title'); if (inTitle && document.activeElement !== inTitle) inTitle.value = appState.projectTitle;
+            const inSub = document.getElementById('edit-project-subtitle'); if (inSub && document.activeElement !== inSub) inSub.value = appState.projectSubtitle;
+            const inTeam = document.getElementById('edit-team-name'); if (inTeam && document.activeElement !== inTeam) inTeam.value = appState.teamName;
+            const inSchool = document.getElementById('edit-school-info'); if (inSchool && document.activeElement !== inSchool) inSchool.value = appState.schoolInfo;
+        }
+        function updateHeaderField(field,value) { appState[field]=value; persistState(); syncHeaderDisplays(); }
+
+        function renderMembersGrid() {
+            const grid = document.getElementById('team-members-grid'); if (!grid) return; grid.innerHTML = '';
+            appState.members.forEach((member,idx) => {
+                const initials = (member.name || 'AI').trim().split(/\s+/).map(part=>part[0]).join('').toUpperCase().slice(0,2) || 'AI';
+                const avatarHTML = member.photo
+                    ? `<img id="avatar-img-${idx}" src="${member.photo}" alt="${escapeHTML(member.name)}" class="w-24 h-24 rounded-full object-cover border-4 border-emerald-400 shadow-lg mx-auto bg-slate-900">`
+                    : `<div id="avatar-img-${idx}" class="w-24 h-24 rounded-full bg-gradient-to-br from-sky-500/30 to-emerald-500/30 border-4 border-emerald-400/70 flex items-center justify-center font-display font-black text-2xl text-emerald-300 mx-auto shadow-lg">${escapeHTML(initials)}</div>`;
+                const card=document.createElement('div'); card.className='rounded-2xl bg-[#081530] border border-sky-800/70 p-5 flex flex-col items-center text-center shadow-lg transition hover:border-emerald-400/60';
+                if (!isVisitorPreview) {
+                    card.innerHTML=`<div class="w-full flex items-center justify-between text-[11px] font-bold text-slate-400 mb-3"><span>MEMBER #${idx+1}</span><button type="button" onclick="removeMember(${idx})" class="px-2 py-0.5 rounded bg-rose-500/20 hover:bg-rose-500 text-rose-300 hover:text-white transition cursor-pointer">Remove ✕</button></div><div class="mb-3">${avatarHTML}<div class="mt-2.5 flex items-center justify-center gap-2"><label class="cursor-pointer px-3 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs shadow transition inline-block">📷 Upload Photo<input type="file" accept="image/*" class="hidden" onchange="uploadMemberPhoto(${idx},this)"></label>${member.photo?`<button type="button" onclick="clearMemberPhoto(${idx})" class="px-2 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-rose-300 text-xs font-semibold cursor-pointer">Clear</button>`:''}</div></div><div class="w-full space-y-2 text-left mt-1"><div><label class="block text-[10px] font-bold text-slate-400 uppercase">Full Name</label><input type="text" value="${escapeHTML(member.name)}" oninput="updateMemberField(${idx},'name',this.value)" class="w-full px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-white font-bold text-sm focus:border-emerald-400 focus:outline-none"></div><div><label class="block text-[10px] font-bold text-slate-400 uppercase">Role in Project</label><input type="text" value="${escapeHTML(member.role)}" oninput="updateMemberField(${idx},'role',this.value)" class="w-full px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-sky-300 font-semibold text-xs focus:border-emerald-400 focus:outline-none"></div><div><label class="block text-[10px] font-bold text-slate-400 uppercase">Class &amp; Roll No.</label><input type="text" value="${escapeHTML(member.classRoll)}" oninput="updateMemberField(${idx},'classRoll',this.value)" class="w-full px-3 py-1.5 rounded-lg bg-slate-950 border border-slate-700 text-slate-300 text-xs focus:border-emerald-400 focus:outline-none"></div></div>`;
+                } else {
+                    card.innerHTML=`<div class="relative mb-3.5 mt-1">${avatarHTML}<span class="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-emerald-400 border-2 border-[#081530]"></span></div><h3 class="font-bold text-white text-lg leading-snug">${escapeHTML(member.name||'Team Member')}</h3><span class="mt-1.5 inline-block px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-xs font-bold">${escapeHTML(member.role||'Project Creator')}</span><p class="mt-2 text-xs text-sky-300/90 font-medium">${escapeHTML(member.classRoll||'')}</p>`;
+                }
+                grid.appendChild(card);
+            });
+        }
+        function updateMemberField(idx,field,value) {
+            if (!appState.members[idx]) return; appState.members[idx][field]=value; persistState();
+            if (field==='name'&&!appState.members[idx].photo) { const el=document.getElementById(`avatar-img-${idx}`); if(el){const initials=(value||'AI').trim().split(/\s+/).map(p=>p[0]).join('').toUpperCase().slice(0,2)||'AI';el.textContent=initials;} }
+        }
+        function addTeamMember(){ appState.members.push({name:"New Student",role:"Project Contributor",classRoll:"Class 10 • Roll No. --",photo:""});persistState();renderMembersGrid();showToast("New member card added!"); }
+        function removeMember(idx){ if(appState.members.length<=1){showToast("Kam se kam 1 team member hona zaroori hai!");return;}appState.members.splice(idx,1);persistState();renderMembersGrid();showToast("Member removed."); }
+        function clearMemberPhoto(idx){if(!appState.members[idx])return;appState.members[idx].photo="";persistState();renderMembersGrid();showToast("Photo removed.");}
+        function uploadMemberPhoto(idx,inputEl){
+            const file=inputEl.files&&inputEl.files[0];if(!file)return;
+            const reader=new FileReader(); reader.onload=function(event){const img=new Image();img.onload=function(){const size=250,canvas=document.createElement('canvas');canvas.width=size;canvas.height=size;const ctx=canvas.getContext('2d'),side=Math.min(img.width,img.height),sx=(img.width-side)/2,sy=(img.height-side)/2;ctx.drawImage(img,sx,sy,side,side,0,0,size,size);appState.members[idx].photo=canvas.toDataURL('image/jpeg',0.85);persistState();renderMembersGrid();showToast("Profile photo uploaded!");};img.src=event.target.result;};reader.readAsDataURL(file);
+        }
+        function toggleVisitorPreview(){
+            if(isPublicLockedFile)return;isVisitorPreview=!isVisitorPreview;
+            const btn=document.getElementById('btn-toggle-preview'),helper=document.getElementById('mode-helper-text');
+            document.querySelectorAll('.edit-mode-only').forEach(el=>el.classList.toggle('hidden',isVisitorPreview));
+            document.querySelectorAll('.visitor-mode-only').forEach(el=>el.classList.toggle('hidden',!isVisitorPreview));
+            if(btn)btn.textContent=isVisitorPreview?'✏️ Back to Edit Mode':'👁️ Switch to Visitor Preview';
+            if(helper)helper.textContent=isVisitorPreview?'Visitor Preview ON — Bilkul aisa hi visitors ko dikhega':'Seedha neeche boxes me type karein & photos upload karein';
+            syncHeaderDisplays();renderMembersGrid();
+        }
+        function downloadPublicWebsite(){
+            const prevPreviewState=isVisitorPreview;if(!isVisitorPreview)toggleVisitorPreview();
+            const docClone=document.documentElement.cloneNode(true);
+            docClone.querySelectorAll('.admin-only').forEach(el=>el.remove());docClone.querySelectorAll('.edit-mode-only').forEach(el=>el.remove());
+            docClone.querySelectorAll('.visitor-mode-only').forEach(el=>el.classList.remove('hidden'));
+            const embedded=docClone.querySelector('#embedded-project-json');if(embedded)embedded.textContent=JSON.stringify(appState);
+            const title=docClone.querySelector('title');if(title)title.textContent=`${appState.projectTitle} | ${appState.teamName}`;
+            const blob=new Blob(['<!DOCTYPE html>\n'+docClone.outerHTML],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='index.html';document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(()=>URL.revokeObjectURL(url),1500);
+            if(!prevPreviewState)toggleVisitorPreview();showToast("Public index.html downloaded! (Visitors cannot edit)");
+        }
+        function generateQRCode(){
+            const box=document.getElementById('qrcode-box'),input=document.getElementById('qr-url-input');if(!box||!input)return;
+            const target=input.value.trim()||'https://username.github.io/ai-better-future/';box.innerHTML='';
+            if(typeof QRCode!=='undefined'){try{new QRCode(box,{text:target,width:170,height:170,colorDark:'#081736',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});return;}catch(e){console.warn('QRCode library fallback triggered:',e);}}
+            box.innerHTML=`<svg width="170" height="170" viewBox="0 0 170 170" xmlns="http://www.w3.org/2000/svg"><rect width="170" height="170" fill="#ffffff"/><rect x="10" y="10" width="42" height="42" fill="none" stroke="#081736" stroke-width="6"/><rect x="21" y="21" width="20" height="20" fill="#081736"/><rect x="118" y="10" width="42" height="42" fill="none" stroke="#081736" stroke-width="6"/><rect x="129" y="21" width="20" height="20" fill="#081736"/><rect x="10" y="118" width="42" height="42" fill="none" stroke="#081736" stroke-width="6"/><rect x="21" y="129" width="20" height="20" fill="#081736"/><text x="85" y="90" font-family="sans-serif" font-size="11" font-weight="bold" fill="#081736" text-anchor="middle">QR PREVIEW</text></svg>`;
+        }
+        function updateStickerText(){document.getElementById('sticker-preview-heading').textContent=document.getElementById('qr-sticker-heading').value||'SCAN TO MEET OUR TEAM';document.getElementById('sticker-preview-sub').textContent=document.getElementById('qr-sticker-sub').value||'AI FOR BETTER FUTURE';}
+        function downloadQRStickerPNG(){
+            const qrCanvas=document.querySelector('#qrcode-box canvas');if(!qrCanvas){showToast('QR code taiyar ho raha hai, ek second baad try karein.');return;}const c=document.createElement('canvas'),w=600,h=740;c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.fillStyle='#ffffff';ctx.fillRect(0,0,w,h);ctx.strokeStyle='#10b981';ctx.lineWidth=14;ctx.strokeRect(18,18,w-36,h-36);ctx.save();ctx.setLineDash([10,8]);ctx.strokeStyle='#081736';ctx.lineWidth=4;ctx.strokeRect(42,42,w-84,h-84);ctx.restore();ctx.fillStyle='#081736';ctx.beginPath();ctx.roundRect(w/2-135,70,270,38,19);ctx.fill();ctx.fillStyle='#34d399';ctx.font='bold 16px sans-serif';ctx.textAlign='center';ctx.fillText('AI PROJECT SCANNER',w/2,95);ctx.fillStyle='#081736';ctx.font='900 28px sans-serif';ctx.fillText(document.getElementById('sticker-preview-heading').textContent.toUpperCase().slice(0,26),w/2,155);const qrSize=330,qrX=(w-qrSize)/2,qrY=185;ctx.strokeStyle='#081736';ctx.lineWidth=6;ctx.strokeRect(qrX-16,qrY-16,qrSize+32,qrSize+32);ctx.drawImage(qrCanvas,qrX,qrY,qrSize,qrSize);ctx.fillStyle='#047857';ctx.font='900 20px sans-serif';ctx.fillText(document.getElementById('sticker-preview-sub').textContent.toUpperCase().slice(0,34),w/2,585);ctx.fillStyle='#334155';ctx.font='bold 20px sans-serif';ctx.fillText(`By ${appState.teamName}`,w/2,625);const link=document.createElement('a');link.download='AI_Project_QR_Cutout.png';link.href=c.toDataURL('image/png');document.body.appendChild(link);link.click();document.body.removeChild(link);showToast('QR Sticker PNG downloaded!');
+        }
+        window.onload=function(){if(isPublicLockedFile){isVisitorPreview=true;document.querySelectorAll('.visitor-mode-only').forEach(el=>el.classList.remove('hidden'));}syncHeaderDisplays();renderMembersGrid();generateQRCode();};
+    </script>
+</body>
+</html>
